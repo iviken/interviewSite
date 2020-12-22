@@ -1,7 +1,6 @@
 <template>
-	<div class="t-head">Ты сегодня покормил кота?</div>
 	<div class="content">
-		<Gallery :menuSelector="menuSelector" @select-pix="selectPix" @leave-pix="leavePix" @focus-pix="focusPix"/>
+		<Gallery :menuSelector="menuSelector" @select-pix="selectPix" @leave-pix="leavePix" @focus-pix="focusPix"/>		
 	</div>
 </template>
 
@@ -11,8 +10,8 @@
 let paths = {
 	defaultHover:	'defaultHover/',
 	selected:		'selected/',
-	selectedHover:'selectedHover/',
-	disabled_:	'kickIt/'
+	selectedHover:	'selectedHover/',
+	disabled_:		'kickIt/'
 };
 //input stock data
 let fromBD = [
@@ -21,9 +20,10 @@ let fromBD = [
 	pix:				'1.png',
 	pixShortName:		'1',
 	stockAvailability:	true,
-	unclickText:		'Порадуй котейку) ',
+	unclickText:		'Давай быстрее порадуй котейку) ',
 	clickText:			'Печень утки разварная с артишрками.',
-	endedText:			'Печалька, с фуа-гра закончился.'
+	endedText:			'Печалька, с фуа-гра закончился.',
+	buyText:			'купи.'
   },
   {
     name:				'with fish',
@@ -32,7 +32,8 @@ let fromBD = [
 	stockAvailability:	true,
 	unclickText:		'Чего сидишь? Порадуй катейку, ',
 	clickText:			'Головы щучьи с чесноком, да свежайшая сёмгушка.',
-	endedText:			'Печалька, с рыбой закончился.'
+	endedText:			'Печалька, с рыбой закончился.',
+	buyText:			'купи.'
   },
   {
     name:				'with chicken',
@@ -41,7 +42,8 @@ let fromBD = [
 	stockAvailability:	false,
 	unclickText:		'Чего сидишь? Порадуй катэ, ',
 	clickText:			'Филе из цыплят с трюфелями в бульоне.',
-	endedText:			'Печалька, с курой закончился.'
+	endedText:			'Печалька, с курой закончился.',
+	buyText:			'купи.'
   }
 ];
 //
@@ -119,6 +121,10 @@ class Card{
 	getTextClass(){
 		return this.state == 'ended' ? this.textClass.ended : this.textClass.inStock;
 	}
+	//
+	getBuyText(){
+		return this.state == 'unselect' ? this.product.buyText : '';
+	}
 }
 //
 import Gallery from './components/Gallery.vue'
@@ -154,35 +160,49 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap');
 
 #app {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: 	center;
-	margin-top: 	60px;
+	-webkit-font-smoothing: 	antialiased;
+	-moz-osx-font-smoothing: 	grayscale;
+	text-align: 				center;
 }
+/*
+#app>div {
+	border:	2px solid gray;
+}
+*/
 
 body {
 	background-image: 	url("./assets/back.jpg");
 	background-repeat:	repeat;
-	
 }
-@media (min-width:	1024px){
+/*	For PC	*/
+@media (min-width:	1025px){
 	body {
-		overflow: 		hidden;
+		overflow: 	hidden;
 	}
 }
 
-.t-head{
-	font-family: 'Jura', sans-serif;
-	color: 			white;
-	font-weight:	light;
-	font-size:		20pt;
+.content{
+	height:	90vh;
 }
 
-.content{
-	display: 		block;
-	flex-wrap: 		wrap;
-	align-content: 	space-between;
-	align-items: 	center;
-	justify-content:center;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
